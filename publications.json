@@ -1,0 +1,130 @@
+[
+  {
+    "y": 2026,
+    "first": true,
+    "a": "<b>Khamphilung, P.</b>, Littidej, P., Pumhirunroj, B., & Slack, D.",
+    "t": "Exploring vegetation–water asynchrony in a flood–drought-prone landscape: Insights from Sentinel-2 and the limitations of predictive modeling",
+    "j": "Symmetry",
+    "v": "18(10), 1737",
+    "doi": "10.3390/sym18101737",
+    "th": false
+  },
+  {
+    "y": 2024,
+    "a": "Majandang, J., Prasansat, S., Littidej, P., <b>Khamphilung, P.</b>, Usaard, N., Pumhirunroj, B., & Slack, D.",
+    "t": "Cohesion analysis of rubber stand ages using object-based image analysis and spatial autocorrelation",
+    "j": "Journal of Computer Science",
+    "v": "20(12), 1723–1733",
+    "doi": "10.3844/jcssp.2024.1723.1733",
+    "first": false,
+    "th": false
+  },
+  {
+    "y": 2024,
+    "a": "Pumhirunroj, B., Littidej, P., Boonmars, T., Artchayasawat, A., Prasertsri, N., <b>Khamphilung, P.</b>, Sangpradid, S., Buasri, N., Uttha, T., & Slack, D.",
+    "t": "Spatial predictive modeling of liver fluke Opisthorchis viverrini infection using machine learning-based forest classification regression",
+    "j": "Symmetry",
+    "v": "16(8), 1067",
+    "doi": "10.3390/sym16081067",
+    "first": false,
+    "th": false
+  },
+  {
+    "y": 2023,
+    "first": true,
+    "a": "<b>Khamphilung, P.</b>, Konyai, S., Slack, D., Chaibandit, K., & Prasertsri, N.",
+    "t": "Flood event detection and assessment using Sentinel-1 SAR-C time series and machine learning classifiers impacted on agricultural area, Northeastern Thailand",
+    "j": "International Journal of Geoinformatics",
+    "v": "19(6), 17–29",
+    "th": false
+  },
+  {
+    "y": 2023,
+    "a": "Pumhirunroj, B., Littidej, P., Boonmars, T., Bootyothee, K., Artchayasawat, A., <b>Khamphilung, P.</b>, & Slack, D.",
+    "t": "Machine-learning-based forest classification and regression for spatial prediction of liver fluke infection in small sub-watersheds",
+    "j": "ISPRS International Journal of Geo-Information",
+    "v": "12(12), 503",
+    "doi": "10.3390/ijgi12120503",
+    "first": false,
+    "th": false
+  },
+  {
+    "y": 2023,
+    "a": "Prasertsri, N., Littidej, P., <b>Khamphilung, S.</b>, Uttha, T., & Slack, D.",
+    "t": "Flood event detection and assessment using Sentinel-1 SAR-C data",
+    "j": "International Journal of Geoinformatics",
+    "first": false,
+    "th": false
+  },
+  {
+    "y": 2021,
+    "first": true,
+    "a": "<b>Khamphilung, S.</b>",
+    "t": "Dong Ra Nang National Forest change detection using multi-temporal Landsat 7 ETM+ imagery by using CART classification: Object-oriented approach",
+    "j": "Current Applied Science and Technology",
+    "v": "318–336",
+    "th": false
+  },
+  {
+    "y": 2021,
+    "first": true,
+    "th": true,
+    "a": "<b>คำพิลัง, โสภณวิชญ์</b>",
+    "t": "การเปรียบเทียบการจำแนกภาพถ่ายดาวเทียมแบบกำกับควบคุมโดยการเลือกกลุ่มตัวอย่างจากวัตถุภาพและจากจุดตัวอย่างแบบเวกเตอร์: กระบวนการจำแนกแบบเชิงวัตถุ",
+    "j": "วารสารวิทยาศาสตร์และเทคโนโลยี มหาวิทยาลัยมหาสารคาม",
+    "v": "40(3), 333–340"
+  },
+  {
+    "y": 2017,
+    "first": true,
+    "a": "<b>Khamphilung, S.</b>",
+    "t": "Shape-based descriptions to classify Na Dun cultural settlement using object-based image analysis",
+    "j": "International Journal of Geoinformatics",
+    "v": "13(2), 45–59",
+    "th": false
+  },
+  {
+    "y": 2017,
+    "th": true,
+    "a": "Laksawath, S., & <b>Khamphilung, S.</b>",
+    "t": "การจำแนกพื้นที่เสี่ยงต่อการเกิดไฟป่าโดยใช้กระบวนการวิเคราะห์ภาพเชิงวัตถุ: กรณีศึกษาอุทยานแห่งชาติน้ำตกตาดโตน จังหวัดชัยภูมิ",
+    "j": "Journal of Science & Technology MSU",
+    "v": "36(4), 493–501",
+    "first": false
+  },
+  {
+    "y": 2013,
+    "first": true,
+    "a": "<b>Khamphilung, S.</b>, Strobl, J., & Tiede, D.",
+    "t": "Village forms classification by object-based image analysis",
+    "j": "International Journal of Geoinformatics",
+    "v": "9(3), 59–68",
+    "th": false
+  },
+  {
+    "y": 2012,
+    "a": "Mahaweerawat, U., Yangyuen, S., <b>Khamphilung, S.</b>, Somdee, T., Songklang, S., Wech-O-sotsakda, C., Thongkrajai, P., & Pichainarong, N.",
+    "t": "Application of GIS to analyze health status of selected communities in Kalasin Province, Thailand",
+    "j": "International Journal of Geoinformatics",
+    "v": "8(3)",
+    "first": false,
+    "th": false
+  },
+  {
+    "y": 2005,
+    "a": "Srisuk, K., Reungsang, A., & <b>Khamphilung, S.</b>",
+    "t": "Analysis of protected and critical groundwater zones, Khon Kaen Province, Northeast Thailand",
+    "j": "Mekong River Commission",
+    "first": false,
+    "th": false
+  },
+  {
+    "y": 2005,
+    "first": true,
+    "a": "<b>Khamphilung, S.</b>, & Mongkolsawat, C.",
+    "t": "Integrating remote sensing and GIS for fire hazard zone modeling in Kalasin Municipality area",
+    "j": "Journal of Remote Sensing and GIS Association of Thailand",
+    "v": "5(1)",
+    "th": false
+  }
+]

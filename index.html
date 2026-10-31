@@ -1,0 +1,378 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="ผศ.ดร.ภูสิษฐ์ คำพิลัง อาจารย์ภาควิชาภูมิสารสนเทศ มหาวิทยาลัยมหาสารคาม งานวิจัยด้าน Remote Sensing, GEOBIA, SAR และ Google Earth Engine">
+<meta property="og:title" content="ผศ.ดร.ภูสิษฐ์ คำพิลัง · Phusit Khamphilung">
+<meta property="og:description" content="ผศ.ดร.ภูสิษฐ์ คำพิลัง อาจารย์ภาควิชาภูมิสารสนเทศ มหาวิทยาลัยมหาสารคาม งานวิจัยด้าน Remote Sensing, GEOBIA, SAR และ Google Earth Engine">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://phusitk-ship-it.github.io/">
+<title>ภูสิษฐ์ คำพิลัง</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans+Thai:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap">
+<style>
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+/* Layout: a segmented-imagery hero (GEOBIA objects) beside the name, then a single reading column with a narrow label rail. */
+:root{
+  --bg:#F2F4F1; --surface:#FFFFFF; --ink:#16211D; --muted:#5A6862; --rule:#D5DCD7;
+  --accent:#1F6B52; --accent-ink:#FFFFFF;
+  --lc-water:#2E6F8E; --lc-paddy:#9FBF6A; --lc-forest:#2F5D3F; --lc-built:#B9B3A8; --lc-soil:#C99A62; --lc-edge:#F2F4F1;
+  --f-display:"Chakra Petch","IBM Plex Sans Thai",system-ui,sans-serif;
+  --f-body:"IBM Plex Sans Thai",system-ui,sans-serif;
+  --f-mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#101714; --surface:#17201C; --ink:#E6ECE8; --muted:#97A59E; --rule:#2A3631;
+  --accent:#6FC3A0; --accent-ink:#0D1411;
+  --lc-water:#2C5C74; --lc-paddy:#6E8A44; --lc-forest:#25432F; --lc-built:#6A665F; --lc-soil:#8C6A43; --lc-edge:#101714;
+  color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#101714; --surface:#17201C; --ink:#E6ECE8; --muted:#97A59E; --rule:#2A3631;
+  --accent:#6FC3A0; --accent-ink:#0D1411;
+  --lc-water:#2C5C74; --lc-paddy:#6E8A44; --lc-forest:#25432F; --lc-built:#6A665F; --lc-soil:#8C6A43; --lc-edge:#101714;
+  color-scheme:dark}
+
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.75;
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.wrap{max-width:1040px;margin:0 auto}
+a{color:var(--accent)}
+a:focus-visible,button:focus-visible{outline:2px solid var(--accent);outline-offset:3px}
+
+nav{display:flex;flex-wrap:wrap;gap:4px 20px;align-items:center;justify-content:space-between;padding-block:20px;border-bottom:1px solid var(--rule)}
+.mark{font-family:var(--f-mono);font-size:13px;color:var(--muted);letter-spacing:.04em;text-decoration:none}
+nav ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:4px 18px}
+nav a{color:var(--ink);text-decoration:none;font-size:14px}
+nav a:hover{color:var(--accent)}
+
+.hero{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,1fr);gap:40px;align-items:center;padding-block:48px 56px}
+.hero-text{min-width:0}
+.eyebrow{font-family:var(--f-mono);font-size:12.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 14px}
+h1{font-family:var(--f-display);font-weight:700;font-size:clamp(34px,5.2vw,54px);line-height:1.15;margin:0;text-wrap:balance}
+.name-en{font-family:var(--f-display);font-weight:500;font-size:clamp(18px,2.2vw,22px);color:var(--muted);margin:6px 0 22px}
+.lede{max-width:34em;margin:0 0 24px}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{font-size:13px;padding:3px 11px;border:1px solid var(--rule);border-radius:999px;color:var(--muted);background:var(--surface)}
+
+figure.scene{margin:0;min-width:0}
+.scene canvas{display:block;width:100%;aspect-ratio:4/3;max-width:100%;border-radius:4px;background:var(--lc-built)}
+.scene figcaption{display:flex;flex-wrap:wrap;justify-content:space-between;gap:4px 16px;margin-top:10px;font-family:var(--f-mono);font-size:12px;color:var(--muted);font-variant-numeric:tabular-nums}
+.legend{display:flex;flex-wrap:wrap;gap:4px 12px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.legend i{width:10px;height:10px;border-radius:2px;display:inline-block}
+
+section{display:grid;grid-template-columns:180px minmax(0,1fr);gap:16px 40px;padding-block:44px;border-top:1px solid var(--rule)}
+.label{min-width:0}
+.label h2{font-family:var(--f-display);font-weight:600;font-size:22px;line-height:1.3;margin:0}
+.label p{font-family:var(--f-mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin:4px 0 0}
+.body{min-width:0;max-width:46em}
+.body > p{margin:0 0 14px}
+.body > p:last-child{margin-bottom:0}
+h3.sub{font-family:var(--f-display);font-weight:600;font-size:16px;margin:28px 0 10px;color:var(--muted);letter-spacing:.02em}
+
+/* timeline: education + experience */
+.tl{list-style:none;margin:0;padding:0;display:grid;gap:14px}
+.tl li{display:grid;grid-template-columns:96px minmax(0,1fr);gap:4px 18px}
+.tl .yr{font-family:var(--f-mono);font-size:14px;color:var(--accent);font-variant-numeric:tabular-nums;padding-top:2px}
+.tl strong{font-weight:600;display:block;line-height:1.5}
+.tl span.where{font-size:15px;color:var(--muted)}
+
+.topics{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px 32px}
+.topics li{min-width:0}
+.topics h3{font-family:var(--f-display);font-weight:600;font-size:17px;line-height:1.4;margin:0 0 4px}
+.topics p{margin:0;font-size:15px;color:var(--muted)}
+.topics .data{font-family:var(--f-mono);font-size:12px;color:var(--accent);margin-top:6px}
+
+/* publications */
+.pubbar{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:20px}
+.pubbar button{font:inherit;font-size:13px;padding:4px 12px;border-radius:999px;border:1px solid var(--rule);background:var(--surface);color:var(--ink);cursor:pointer}
+.pubbar button[aria-pressed="true"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.pubs{display:grid;gap:0}
+.yeargroup{display:grid;grid-template-columns:64px minmax(0,1fr);gap:0 18px;padding-block:14px;border-top:1px solid var(--rule)}
+.yeargroup:first-child{border-top:0;padding-top:0}
+.yeargroup .y{font-family:var(--f-display);font-weight:700;font-size:20px;color:var(--accent);font-variant-numeric:tabular-nums;line-height:1.5}
+.yeargroup ol{list-style:none;margin:0;padding:0;display:grid;gap:14px;min-width:0}
+.pub{font-size:15px;line-height:1.65;min-width:0;overflow-wrap:anywhere}
+.pub .t{display:block;font-weight:600;color:var(--ink)}
+.pub .a{color:var(--muted)}
+.pub .a b{color:var(--ink);font-weight:600}
+.pub .j{font-style:italic}
+.pub .doi{font-family:var(--f-mono);font-size:12.5px}
+.tag{font-family:var(--f-mono);font-size:11px;letter-spacing:.05em;padding:1px 6px;border-radius:3px;border:1px solid var(--rule);color:var(--muted);margin-left:6px;white-space:nowrap}
+
+.books{display:grid;gap:14px}
+.book{display:grid;grid-template-columns:auto minmax(0,1fr);gap:4px 18px;align-items:start;background:var(--surface);border:1px solid var(--rule);border-radius:6px;padding:18px 20px}
+.book .status{grid-row:span 2;font-family:var(--f-mono);font-size:11.5px;letter-spacing:.06em;text-transform:uppercase;padding:3px 8px;border-radius:3px;background:var(--accent);color:var(--accent-ink);white-space:nowrap}
+.book .status.alt{background:transparent;color:var(--accent);border:1px solid var(--accent)}
+.book h3{font-family:var(--f-display);font-weight:600;font-size:18px;margin:0;line-height:1.4}
+.book p{margin:0;font-size:15px;color:var(--muted)}
+
+.courses{width:100%;border-collapse:collapse;font-size:15px}
+.courses th,.courses td{text-align:left;padding:9px 12px 9px 0;border-bottom:1px solid var(--rule);vertical-align:top}
+.courses th{font-family:var(--f-mono);font-size:11.5px;font-weight:500;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
+.courses td:first-child{font-family:var(--f-mono);font-size:14px;font-variant-numeric:tabular-nums;white-space:nowrap;color:var(--accent)}
+.courses .en{display:block;font-size:13.5px;color:var(--muted)}
+.tablebox{overflow-x:auto}
+.note{font-size:14px;color:var(--muted);margin-top:14px}
+
+.tools{display:flex;flex-wrap:wrap;gap:8px}
+.tools span{font-family:var(--f-mono);font-size:13px;padding:5px 12px;border-radius:4px;background:var(--surface);border:1px solid var(--rule)}
+
+.contact{display:grid;gap:12px}
+.crow{display:grid;grid-template-columns:96px minmax(0,1fr);gap:4px 18px;align-items:baseline}
+.crow dt{font-size:14px;color:var(--muted)}
+.crow dd{margin:0;min-width:0}
+.mono{font-family:var(--f-mono);font-size:15px;font-variant-numeric:tabular-nums;user-select:all}
+.copy{font:inherit;font-size:13px;padding:3px 12px;margin-left:10px;border-radius:4px;border:1px solid var(--accent);background:transparent;color:var(--accent);cursor:pointer}
+.copy:hover{background:var(--accent);color:var(--accent-ink)}
+
+footer{border-top:1px solid var(--rule);padding-block:24px 40px;font-family:var(--f-mono);font-size:12px;color:var(--muted);display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px}
+
+@media (max-width:760px){
+  .hero{grid-template-columns:1fr;gap:28px;padding-block:32px 40px}
+  section{grid-template-columns:1fr;padding-block:32px}
+  .topics{grid-template-columns:1fr}
+  .book{grid-template-columns:1fr}
+  .book .status{grid-row:auto;justify-self:start}
+  .yeargroup{grid-template-columns:1fr;gap:6px}
+  .tl li,.crow{grid-template-columns:1fr;gap:0}
+  .copy{margin-left:0;margin-top:6px}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <nav aria-label="เมนูหลัก">
+    <a class="mark" href="https://www.google.com/maps?q=16.246602,103.252017" target="_blank" rel="noopener">16.2466°N · 103.2520°E</a>
+    <ul>
+      <li><a href="#about">เกี่ยวกับ</a></li>
+      <li><a href="#research">งานวิจัย</a></li>
+      <li><a href="#publications">ผลงาน</a></li>
+      <li><a href="#teaching">การสอน</a></li>
+      <li><a href="#contact">ติดต่อ</a></li>
+    </ul>
+  </nav>
+
+  <header class="hero">
+    <div class="hero-text">
+      <p class="eyebrow">Applied Geoinformatics · Remote Sensing · GEOBIA</p>
+      <h1>ผศ.ดร.ภูสิษฐ์ คำพิลัง</h1>
+      <p class="name-en">Asst. Prof. Dr.rer.nat Phusit Khamphilung</p>
+      <p class="lede">อาจารย์และนักวิจัย ภาควิชาภูมิสารสนเทศ คณะวิทยาการสารสนเทศ มหาวิทยาลัยมหาสารคาม ศึกษาการเปลี่ยนแปลงของพื้นที่ภาคตะวันออกเฉียงเหนือด้วยภาพถ่ายดาวเทียมหลายแหล่ง ตั้งแต่ Landsat, Sentinel ไปจนถึงภาพความละเอียดสูง</p>
+      <div class="chips">
+        <span class="chip">OBIA / GEOBIA</span>
+        <span class="chip">Sentinel-1 SAR</span>
+        <span class="chip">Machine Learning</span>
+        <span class="chip">Google Earth Engine</span>
+      </div>
+    </div>
+    <figure class="scene">
+      <canvas id="seg" width="480" height="360" role="img" aria-label="ภาพจำลองการแบ่งส่วนภาพเชิงวัตถุ แสดงพื้นที่น้ำ นาข้าว ป่า ชุมชน และดินเปลือย"></canvas>
+      <figcaption>
+        <span class="legend">
+          <span><i style="background:var(--lc-water)"></i>น้ำ</span>
+          <span><i style="background:var(--lc-paddy)"></i>นาข้าว</span>
+          <span><i style="background:var(--lc-forest)"></i>ป่า</span>
+          <span><i style="background:var(--lc-built)"></i>ชุมชน</span>
+          <span><i style="background:var(--lc-soil)"></i>ดินเปลือย</span>
+        </span>
+        <span id="segcount">segments: —</span>
+      </figcaption>
+    </figure>
+  </header>
+
+  <section id="about">
+    <div class="label"><h2>เกี่ยวกับ</h2><p>About</p></div>
+    <div class="body">
+      <p>พื้นฐานด้านภูมิศาสตร์ การรับรู้จากระยะไกล และระบบสารสนเทศภูมิศาสตร์ งานวิจัยเน้นการวิเคราะห์ภาพเชิงวัตถุ (OBIA/GEOBIA) ข้อมูลรีโมตเซนซิงหลายแหล่ง และแบบจำลองเชิงพื้นที่สำหรับประเด็นสิ่งแวดล้อมและเศรษฐสังคม เช่น การเปลี่ยนแปลงการใช้ที่ดิน รูปทรงหมู่บ้าน พลวัตของป่า และความเหลื่อมล้ำเชิงพื้นที่</p>
+      <p>งานช่วงหลังผสานรีโมตเซนซิงเข้ากับ Machine Learning และใช้ Google Earth Engine สำหรับการวิเคราะห์อนุกรมเวลาในพื้นที่ขนาดใหญ่ ควบคู่กับการสอนและการเขียนตำราสำหรับนิสิต</p>
+
+      <h3 class="sub">การศึกษา · Education</h3>
+      <ul class="tl">
+        <li><span class="yr">2014</span><div><strong>Dr.rer.nat. Applied Geoinformatics</strong><span class="where">University of Salzburg, Austria</span></div></li>
+        <li><span class="yr">2003</span><div><strong>วท.ม. Remote Sensing and GIS</strong><span class="where">มหาวิทยาลัยขอนแก่น</span></div></li>
+        <li><span class="yr">1997</span><div><strong>ปริญญาตรี Electronic Telecommunication</strong><span class="where">ราชมงคล วิทยาเขตขอนแก่น</span></div></li>
+      </ul>
+
+      <h3 class="sub">ประสบการณ์ · Experience</h3>
+      <ul class="tl">
+        <li><span class="yr">2006–ปัจจุบัน</span><div><strong>อาจารย์และนักวิจัย ภาควิชาภูมิสารสนเทศ</strong><span class="where">มหาวิทยาลัยมหาสารคาม</span></div></li>
+        <li><span class="yr">1997–2006</span><div><strong>GIS Specialist / ผู้ช่วยนักวิจัย</strong><span class="where">ศูนย์วิจัยน้ำบาดาล มหาวิทยาลัยขอนแก่น</span></div></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="research">
+    <div class="label"><h2>ประเด็นวิจัย</h2><p>Research</p></div>
+    <div class="body">
+      <ul class="topics">
+        <li><h3>การตรวจจับน้ำท่วมด้วยเรดาร์</h3><p>ประเมินน้ำท่วมพื้นที่เกษตรจากอนุกรมเวลา Sentinel-1 ร่วมกับตัวจำแนก Machine Learning</p><div class="data">Sentinel-1 SAR-C · Time series</div></li>
+        <li><h3>การวิเคราะห์ภาพเชิงวัตถุ</h3><p>จำแนกรูปทรงหมู่บ้าน ชุมชนวัฒนธรรม และสวนยางด้วยคุณลักษณะรูปร่างของวัตถุภาพ</p><div class="data">OBIA · Shape descriptors</div></li>
+        <li><h3>ความเหลื่อมล้ำเชิงพื้นที่</h3><p>ใช้แสงไฟยามค่ำคืนและรูปทรงชุมชนเป็นตัวแทนสภาพเศรษฐสังคมของหมู่บ้านชนบท</p><div class="data">VIIRS NTL · Village Shape Index</div></li>
+        <li><h3>พลวัตพืชพรรณและน้ำ</h3><p>ศึกษาความไม่สอดคล้องระหว่างพืชพรรณกับน้ำในภูมิทัศน์ที่เผชิญทั้งน้ำท่วมและภัยแล้ง</p><div class="data">Sentinel-2 · NDVI / NDWI</div></li>
+        <li><h3>การเปลี่ยนแปลงพื้นที่ป่า</h3><p>ตรวจหาการเปลี่ยนแปลงป่าสงวนแห่งชาติจากภาพหลายช่วงเวลา และจำแนกพื้นที่เสี่ยงไฟป่า</p><div class="data">Landsat · CART · Change detection</div></li>
+        <li><h3>แบบจำลองเชิงพื้นที่ด้านสุขภาพ</h3><p>ทำนายพื้นที่เสี่ยงการติดเชื้อพยาธิใบไม้ตับระดับลุ่มน้ำย่อยด้วย Random Forest</p><div class="data">Random Forest · GWR · Spatial autocorrelation</div></li>
+      </ul>
+    </div>
+  </section>
+
+  <section id="publications">
+    <div class="label"><h2>ผลงานตีพิมพ์</h2><p>Publications</p></div>
+    <div class="body">
+      <div class="pubbar" role="group" aria-label="กรองผลงาน">
+        <button type="button" data-f="all" aria-pressed="true">ทั้งหมด</button>
+        <button type="button" data-f="first" aria-pressed="false">ผู้แต่งหลัก</button>
+        <button type="button" data-f="since2020" aria-pressed="false">ตั้งแต่ 2020</button>
+      </div>
+      <div class="pubs" id="pubs"></div>
+      <p class="note">ผลงานก่อนปี 2024 บางรายการตีพิมพ์ภายใต้ชื่อเดิม Khamphilung, S.</p>
+    </div>
+  </section>
+
+  <section id="teaching">
+    <div class="label"><h2>การสอน</h2><p>Teaching</p></div>
+    <div class="body">
+      <div class="tablebox">
+        <table class="courses">
+          <thead><tr><th>รหัส</th><th>รายวิชา</th></tr></thead>
+          <tbody>
+            <tr><td>1209202</td><td>การรับรู้จากระยะไกล<span class="en">Remote Sensing</span></td></tr>
+            <tr><td>1209221</td><td>การวางแผนการใช้ที่ดิน<span class="en">Land Use Planning</span></td></tr>
+            <tr><td>1209223</td><td>การประมวลผลภาพดิจิทัล<span class="en">Digital Image Processing</span></td></tr>
+            <tr><td>1209361</td><td>การรับรู้จากระยะไกลด้วยคลื่นไมโครเวฟ<span class="en">Microwave Remote Sensing</span></td></tr>
+            <tr><td>1209364</td><td>การวิเคราะห์ภาพเชิงวัตถุ<span class="en">Object-based Image Analysis</span></td></tr>
+            <tr><td>1209367</td><td>อนุกรมเวลาการรับรู้จากระยะไกล<span class="en">Remote Sensing Time Series</span></td></tr>
+            <tr><td>1209380</td><td>การจำลองเชิงภูมิศาสตร์<span class="en">Geosimulation</span></td></tr>
+            <tr><td>0041004</td><td>ภาษาอังกฤษสำหรับวิทยาศาสตร์<span class="en">English for Science · หลักสูตรไทยและนานาชาติ</span></td></tr>
+            <tr><td>0041011</td><td>ภาษาอังกฤษเพื่อการนำเสนอทางวิชาการ<span class="en">English for Academic Presentation · หลักสูตรไทยและนานาชาติ</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 class="sub">ตำราและเอกสารประกอบการสอน · Teaching materials</h3>
+      <div class="books">
+        <article class="book">
+          <span class="status">ตำรา</span>
+          <h3>การวิเคราะห์ภาพถ่ายดาวเทียมเชิงวัตถุ</h3>
+          <p>Object-based satellite image analysis (ภาษาไทย)</p>
+        </article>
+        <article class="book">
+          <span class="status">CU eBook</span>
+          <h3>การรับรู้จากระยะไกลด้วยคลื่นไมโครเวฟ</h3>
+          <p>Microwave Remote Sensing ครอบคลุม SAR, InSAR และ PolSAR จัดพิมพ์โดยศูนย์หนังสือแห่งจุฬาลงกรณ์มหาวิทยาลัย</p>
+        </article>
+        <article class="book">
+          <span class="status alt">เอกสารคำสอน</span>
+          <h3>1209202 Remote Sensing · 1209361 Microwave Remote Sensing</h3>
+          <p>เอกสารคำสอนภาษาไทย</p>
+        </article>
+        <article class="book">
+          <span class="status alt">เอกสารประกอบ</span>
+          <h3>1209223 Digital Image Processing</h3>
+          <p>เอกสารประกอบการสอน</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="tools">
+    <div class="label"><h2>เครื่องมือ</h2><p>Toolkit</p></div>
+    <div class="body tools">
+      <span>Google Earth Engine</span><span>ArcGIS Pro</span><span>QGIS</span><span>SNAP</span><span>eCognition</span><span>Python</span><span>R</span>
+    </div>
+  </section>
+
+  <section id="contact">
+    <div class="label"><h2>ติดต่อ</h2><p>Contact</p></div>
+    <div class="body">
+      <p>ภาควิชาภูมิสารสนเทศ คณะวิทยาการสารสนเทศ มหาวิทยาลัยมหาสารคาม ต.ขามเรียง อ.กันทรวิชัย จ.มหาสารคาม 44150</p>
+      <dl class="contact">
+        <div class="crow"><dt>อีเมล</dt><dd><span class="mono" id="email">phusit.k@msu.ac.th</span><button class="copy" data-copy="email" type="button">คัดลอก</button></dd></div>
+        <div class="crow"><dt>โทรศัพท์</dt><dd><span class="mono">+66 4371 9800</span> <span class="tag">ต่อ 5001</span></dd></div>
+        <div class="crow"><dt>มือถือ</dt><dd><span class="mono">+66 63 635 5044</span></dd></div>
+        <div class="crow"><dt>ที่ตั้ง</dt><dd><a href="https://www.google.com/maps?q=16.246602,103.252017" target="_blank" rel="noopener">เปิดใน Google Maps</a> <span class="mono" style="font-size:12.5px;color:var(--muted)">16.246602, 103.252017</span></dd></div>
+      </dl>
+    </div>
+  </section>
+
+  <footer>
+    <span>© 2026 Phusit Khamphilung</span>
+    <span>Mahasarakham University · Thailand</span>
+  </footer>
+</div>
+
+<script>
+let PUBS=[];
+function renderPubs(f){
+  const box=document.getElementById('pubs');
+  const list=PUBS.filter(p=>f==='all'||(f==='first'&&p.first)||(f==='since2020'&&p.y>=2020));
+  const years=[...new Set(list.map(p=>p.y))];
+  box.innerHTML=years.map(y=>'<div class="yeargroup"><div class="y">'+y+'</div><ol>'+
+    list.filter(p=>p.y===y).map(p=>'<li class="pub"><span class="t">'+p.t+(p.th?'<span class="tag">TH</span>':'')+'</span><span class="a">'+p.a+'</span> <span class="j">'+p.j+'</span>'+(p.v?', '+p.v:'')+'.'+
+      (p.doi?' <a class="doi" href="https://doi.org/'+p.doi+'" target="_blank" rel="noopener">doi:'+p.doi+'</a>':'')+'</li>').join('')+'</ol></div>').join('');
+}
+fetch('publications.json').then(r=>r.json()).then(d=>{PUBS=d;renderPubs('all')}).catch(()=>{document.getElementById('pubs').textContent='ไม่สามารถโหลดรายการผลงานได้';});
+document.querySelectorAll('.pubbar button').forEach(b=>b.addEventListener('click',()=>{
+  document.querySelectorAll('.pubbar button').forEach(x=>x.setAttribute('aria-pressed',x===b?'true':'false'));
+  renderPubs(b.dataset.f);
+}));
+
+(function(){
+  const cv=document.getElementById('seg'); if(!cv) return;
+  const ctx=cv.getContext('2d');
+  let seed=20517;
+  const rnd=()=>{seed=(seed*16807)%2147483647;return (seed-1)/2147483646};
+  const W=160,H=120,N=72,pts=[];
+  for(let i=0;i<N;i++){
+    const x=rnd()*W,y=rnd()*H,d=Math.abs((y-H*0.15)-(x*0.55));
+    let c;
+    if(d<9) c='water';
+    else if(x<W*0.3&&y<H*0.45) c='forest';
+    else if(rnd()<0.14) c='built';
+    else if(rnd()<0.18) c='soil';
+    else c='paddy';
+    pts.push({x,y,c});
+  }
+  const lab=new Int16Array(W*H);
+  for(let y=0;y<H;y++)for(let x=0;x<W;x++){
+    let b=0,bd=1e9;
+    for(let i=0;i<N;i++){const dx=x-pts[i].x,dy=(y-pts[i].y)*1.15,dd=dx*dx+dy*dy;if(dd<bd){bd=dd;b=i}}
+    lab[y*W+x]=b;
+  }
+  function hex(v){v=v.trim();if(v[0]!=='#')return[128,128,128];if(v.length===4)v='#'+v[1]+v[1]+v[2]+v[2]+v[3]+v[3];return[1,3,5].map(i=>parseInt(v.slice(i,i+2),16))}
+  function draw(){
+    const cs=getComputedStyle(document.documentElement),col={};
+    ['water','paddy','forest','built','soil','edge'].forEach(k=>col[k]=hex(cs.getPropertyValue('--lc-'+k)));
+    const off=document.createElement('canvas');off.width=W;off.height=H;
+    const o=off.getContext('2d'),img=o.createImageData(W,H);
+    for(let y=0;y<H;y++)for(let x=0;x<W;x++){
+      const i=y*W+x,l=lab[i];
+      const edge=(x<W-1&&lab[i+1]!==l)||(y<H-1&&lab[i+W]!==l);
+      const c=edge?col.edge:col[pts[l].c];
+      const n=edge?0:((((x*73856093)^(y*19349663))>>>0)%13)-6;
+      img.data.set([c[0]+n,c[1]+n,c[2]+n,255],i*4);
+    }
+    o.putImageData(img,0,0);
+    ctx.imageSmoothingEnabled=false;
+    ctx.drawImage(off,0,0,cv.width,cv.height);
+  }
+  draw();
+  document.getElementById('segcount').textContent='segments: '+N+' · 160×120 px';
+  try{matchMedia('(prefers-color-scheme: dark)').addEventListener('change',draw)}catch(e){}
+  new MutationObserver(draw).observe(document.documentElement,{attributes:true,attributeFilter:['data-theme']});
+})();
+
+document.querySelectorAll('.copy').forEach(btn=>btn.addEventListener('click',()=>{
+  const em=document.getElementById(btn.dataset.copy),orig=btn.textContent;
+  const done=()=>{btn.textContent='คัดลอกแล้ว';setTimeout(()=>btn.textContent=orig,1800)};
+  const sel=()=>{const r=document.createRange();r.selectNodeContents(em);const s=getSelection();s.removeAllRanges();s.addRange(r);};
+  try{navigator.clipboard.writeText(em.textContent).then(done,sel)}catch(e){sel()}
+}));
+</script>
+</body>
+</html>
